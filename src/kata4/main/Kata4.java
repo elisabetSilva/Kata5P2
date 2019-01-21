@@ -8,13 +8,13 @@ import java.util.List;
 
 public class Kata4 {
 
+    private static List<String> listMails;
+    private static Histogram histograma;
+    
     public static void main(String[] args) throws IOException {
         Kata4 kataCuatro = new Kata4(); 
         kataCuatro.execute();
     }
-    
-    private List<Mail> mailList;
-    private Histogram<String> histogram;
     
     public void execute() throws IOException{
         input();
@@ -23,16 +23,16 @@ public class Kata4 {
     }
 
     private void input() throws IOException {
-        String fileName = ".\\src\\kata4\\emails.txt";
-        mailList = MailListReader.read(fileName);
+        MailListReaderBD bd = new MailListReaderBD();
+        listMails = bd.read("jdbc:sqlite:PEOPLE.db", "EMAIL");
     }
 
     private void process() {
-        histogram = MailHistogramBuilder.build(mailList);
+        MailHistogramBuilder builded = new MailHistogramBuilder();
+        histograma = builded.build(listMails);
     }
 
     private void output() {
-        HistogramDisplay histodisplay = new HistogramDisplay(histogram);
-        histodisplay.execute();
+        new HistogramDisplay(histograma).execute();
     }
 }

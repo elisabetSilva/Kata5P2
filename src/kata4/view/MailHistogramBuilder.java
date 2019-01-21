@@ -1,18 +1,18 @@
 package kata4.view;
 
 import kata4.model.Histogram;
-import kata4.model.Mail;
 import java.util.List;
 
 public class MailHistogramBuilder {
     
-    public static Histogram<String> build(List<Mail> mail){
-        Histogram<String> histo = new Histogram<>();
-        for (Mail mail1 : mail) {
-            histo.increment(mail1.getDomain());
+    public MailHistogramBuilder(){}
+
+    public Histogram<String> build (List<String> mails){
+        Histogram<String> histogram = new Histogram();
+        for (String mail : mails) {
+            histogram.increment(mail);
         }
-        
-        return histo;
+        return histogram;
     }
     
 }
